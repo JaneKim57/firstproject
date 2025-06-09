@@ -68,7 +68,7 @@ physics_videos = {
     ]
 }
 
-st.title("⚛️ 고등 물리 핵심: 썸네일로 영상 보기")
+st.title("⚛️ 고등 물리 핵심: 3분 영상으로 미리 보기")
 st.markdown("각 영상의 썸네일을 클릭하면 유튜브로 이동합니다.")
 
 unit_list = list(physics_videos.keys())
