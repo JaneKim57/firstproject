@@ -42,6 +42,7 @@ if selected_unit:
     st.subheader(f"📺 '{selected_unit}' 단원의 추천 영상 🎓")
     
     for idx, video in enumerate(physics_videos[selected_unit], 1):
+        
         st.write(f"{idx}. {video}")
     
     st.success("✨ 영상으로 개념을 더 쉽게 이해해봐요!")
