@@ -1,111 +1,48 @@
 import streamlit as st
 
-# MBTI 16가지 리스트
-mbti_types = [
-    "INTJ", "INTP", "ENTJ", "ENTP",
-    "INFJ", "INFP", "ENFJ", "ENFP",
-    "ISTJ", "ISFJ", "ESTJ", "ESFJ",
-    "ISTP", "ISFP", "ESTP", "ESFP"
-]
-
-# MBTI별 추천 영화
-movie_recommendations = {
-    "INTJ": [
-        "🧠 A Beautiful Mind (2001)",
-        "💻 The Imitation Game (2014)",
-        "🧪 Primer (2004)"
+# 📘 단원별 유튜브 추천 링크 (예시 데이터)
+physics_videos = {
+    "1. 운동의 표현": [
+        "🔗 [속력과 속도 설명 영상](https://www.youtube.com/watch?v=WcBkI5-4ncE)",
+        "🔗 [가속도 개념 쉽게 이해하기](https://www.youtube.com/watch?v=rR3qfS9NTyQ)"
     ],
-    "INTP": [
-        "🔬 Ex Machina (2014)",
-        "📐 Good Will Hunting (1997)",
-        "🚀 Interstellar (2014)"
+    "2. 뉴턴 운동 법칙": [
+        "🧲 [뉴턴 제1법칙: 관성의 법칙](https://www.youtube.com/watch?v=fqKjLFfdbpE)",
+        "🛠️ [뉴턴 제2법칙: F=ma](https://www.youtube.com/watch?v=VZbM_ZMKc2o)",
+        "🪐 [뉴턴 제3법칙: 작용-반작용 법칙](https://www.youtube.com/watch?v=kKKM8Y-u7ds)"
     ],
-    "ENTJ": [
-        "📊 The Social Network (2010)",
-        "🦾 Iron Man (2008)",
-        "🧬 Jurassic Park (1993)"
+    "3. 일과 에너지": [
+        "⚙️ [일(work)의 개념](https://www.youtube.com/watch?v=owI7DOeO85s)",
+        "💥 [운동 에너지 & 위치 에너지](https://www.youtube.com/watch?v=5PfS2E4ybsU)"
     ],
-    "ENTP": [
-        "🌀 Back to the Future (1985)",
-        "🛰️ The Martian (2015)",
-        "🧪 The Prestige (2006)"
+    "4. 역학적 에너지 보존": [
+        "🔋 [에너지 보존 법칙 쉽게 보기](https://www.youtube.com/watch?v=kzVbnmctf3g)",
+        "🎢 [롤러코스터로 보는 역학적 에너지](https://www.youtube.com/watch?v=E1OKBvS2Y2I)"
     ],
-    "INFJ": [
-        "🌌 Contact (1997)",
-        "🧭 Arrival (2016)",
-        "🪐 The Fountain (2006)"
-    ],
-    "INFP": [
-        "🎇 October Sky (1999)",
-        "🪐 The Theory of Everything (2014)",
-        "🧬 Gattaca (1997)"
-    ],
-    "ENFJ": [
-        "👩‍🚀 Hidden Figures (2016)",
-        "🌠 Interstellar (2014)",
-        "🧠 The Man Who Knew Infinity (2015)"
-    ],
-    "ENFP": [
-        "🚀 Tomorrowland (2015)",
-        "🌍 Don’t Look Up (2021)",
-        "🧑‍🚀 WALL-E (2008)"
-    ],
-    "ISTJ": [
-        "🧠 The Imitation Game (2014)",
-        "🧮 Moneyball (2011)",
-        "📊 The Big Short (2015)"
-    ],
-    "ISFJ": [
-        "👩‍🚀 Hidden Figures (2016)",
-        "📚 The Man Who Knew Infinity (2015)",
-        "🛰️ Apollo 13 (1995)"
-    ],
-    "ESTJ": [
-        "📈 The Big Short (2015)",
-        "⚖️ 12 Angry Men (1957)",
-        "🏭 The Current War (2017)"
-    ],
-    "ESFJ": [
-        "🏥 Patch Adams (1998)",
-        "🌟 The Theory of Everything (2014)",
-        "🩺 Awakenings (1990)"
-    ],
-    "ISTP": [
-        "🚘 Ford v Ferrari (2019)",
-        "🔩 Iron Man (2008)",
-        "🔭 Interstellar (2014)"
-    ],
-    "ISFP": [
-        "🎨 The Aeronauts (2019)",
-        "🌄 Into the Wild (2007)",
-        "🎈 The Boy Who Harnessed the Wind (2019)"
-    ],
-    "ESTP": [
-        "🚀 The Martian (2015)",
-        "🛠️ Iron Man (2008)",
-        "🎢 Inception (2010)"
-    ],
-    "ESFP": [
-        "🎤 Bohemian Rhapsody (2018)",
-        "💃 Hidden Figures (2016)",
-        "🌍 Don’t Look Up (2021)"
+    "5. 열역학 기초": [
+        "🔥 [온도와 열의 차이](https://www.youtube.com/watch?v=6nQFOZ5HfSs)",
+        "🌡️ [열역학 제1법칙](https://www.youtube.com/watch?v=l2DLZd2VXk0)"
     ]
 }
 
-# Streamlit UI
-st.title("🎬 MBTI 기반 수학·과학 명작 영화 추천기 🔭")
+# 🎯 앱 제목
+st.title("⚛️ 고등학교 물리학 I 단원별 유튜브 추천 서비스 🚀")
+st.markdown("물리학 I 단원을 선택하면, 이해를 돕는 **유튜브 영상 링크**를 추천해드려요! 📽️💡")
 
-st.markdown("당신의 **MBTI 유형**을 선택하세요. 선택한 유형에 어울리는 🧠 수학/과학 영화들을 추천해드려요! 🍿")
+# 📚 단원 리스트
+unit_list = list(physics_videos.keys())
 
-# selectbox로 MBTI 고르기
-selected_mbti = st.selectbox("🧩 MBTI 유형을 선택하세요", mbti_types)
+# 🧑‍🏫 단원 선택
+selected_unit = st.selectbox("📖 학습할 단원을 선택하세요:", unit_list)
 
-# 추천 영화 보여주기
-if selected_mbti:
-    st.balloons()  # 🎈 풍선 효과
-    st.subheader(f"🍿 {selected_mbti} 유형에게 추천하는 영화 리스트 🎉")
+# ▶️ 영상 추천
+if selected_unit:
+    st.balloons()  # 🎈 풍선 팡팡!
+    
+    st.subheader(f"📺 '{selected_unit}' 단원의 추천 영상 🎓")
+    
+    for idx, video in enumerate(physics_videos[selected_unit], 1):
+        st.write(f"{idx}. {video}")
+    
+    st.success("✨ 영상으로 개념을 더 쉽게 이해해봐요!")
 
-    for i, movie in enumerate(movie_recommendations[selected_mbti], 1):
-        st.write(f"{i}. {movie}")
-
-    st.success("🎬 좋은 시간 되세요! 과학은 언제나 흥미롭고, 영화는 언제나 감동적이죠 💡")
